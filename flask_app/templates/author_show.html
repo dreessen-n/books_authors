@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <title>Dojo Show</title>
+</head>
+<body>
+    <div class="container">
+        <h2>{{dojo.name}} - Ninjas</h2>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>First Name</th>  
+                    <th>Last Name</th>
+                    <th>Age</th>
+                </tr>
+                {% for ninja in dojo.ninjas %}
+                <tr>
+                    <td>{{ninja.first_name}}</td>
+                    <td>{{ninja.last_name}}</td>
+                    <td>{{ninja.age}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div editable="rich">
+            <div class="btn-home">
+                <a class="btn btn-primary btn-sm px-4 gap-3" href="/dojos" role="button">Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/js/script.js') }}"></script>
+</body>
+</html>
