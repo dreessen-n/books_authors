@@ -1,6 +1,8 @@
 # Coding Dojo Bootcamp 2022
 flask and MySQL - CRUD section - books_authors assignment
 
+Many to Many relationship; drop downs show authors or books not in favorites for authors or a book.
+
 Authors
 
 ![authors](https://user-images.githubusercontent.com/99504059/177882507-14b288e3-a921-40ca-90dd-9f0592c2106d.png)
