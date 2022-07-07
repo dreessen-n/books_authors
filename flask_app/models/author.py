@@ -19,6 +19,7 @@ class Author:
         authors_from_db = connectToMySQL('books_authors_schema').query_db(query)
         authors = []
         for a in authors_from_db:
+            # Create an instance of author and append to list of authors
             authors.append(cls(a))
         return authors
 
@@ -30,6 +31,8 @@ class Author:
 
     @classmethod
     def get_author_and_fav_books(cls,data):
+        """Use LEFT JOINs to get author and all the books favorited by the author"""
+        # get all from authors becuase need all values to manke an instance 
         query = "SELECT * FROM authors LEFT JOIN favorites ON authors.id = favorites.author_id LEFT JOIN books ON favorites.book_id = book.id WHERE authors.id = %(id)s;"
         results = connectToMySQL('books_authors_schema').query_db(query,data)
         # Result will be an author with associated favorite books
