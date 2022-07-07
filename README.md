@@ -2,6 +2,7 @@
 flask and MySQL - CRUD section - books_authors assignment
 
 > Many to Many relationship
+
 > Drop downs show authors or books that are not all ready in favorites for authors or a book.
 
 Authors
