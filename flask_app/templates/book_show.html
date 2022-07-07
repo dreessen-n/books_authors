@@ -13,31 +13,28 @@
     <div class="container">
         <div class="row justify-content-evenly">
             <div class="col-4">
-                <h2>{{author.name}}'s Favorites</h2>
+                <h2>Title: {{book.title}}</h2>
                 <table class="table table-striped">
                     <tbody>
                         <tr>
-                            <th>Title</th>  
-                            <th># of Pages</th>
+                            <th>Followed by:</th>  
                         </tr>
-                        {% for book in author.books %}
+                        {% for author in book.authors_favs %}
                         <tr>
-                            <td>{{book.first_name}}</td>
-                            <td>{{book.last_name}}</td>
-                            <td>{{book.age}}</td>
+                            <td>{{author.name}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
             <div class="col-4">
-                <h2>Add Author's Favorite</h2>
+                <h2>Add Book's Favorite</h2>
                 <form  action="/author/favorite/", method="POST">
-                    <label class="new_form" for="name">Book:</label>
-                    <select name="'book_id" class="form-select" aria-label="Default select example">
-                        <option selected>Select a Book</option>
-                        {% for book in books %}
-                        <option value="{{book.id}}">{{book.name}}</option>
+                    <label class="new_form" for="name">Author:</label>
+                    <select name="'author_id" class="form-select" aria-label="Default select example">
+                        <option selected>Select a Author</option>
+                        {% for author in not_fav_author %}
+                        <option value="{{author.id}}">{{author.name}}</option>
                         {% endfor %}
                     </select>
                     <div class="btn-add">
@@ -49,16 +46,6 @@
                         <a class="btn btn-primary btn-sm px-4 gap-3" href="/authors" role="button">Home</a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!--old stuff below-->
-    
-    <div class="container">
-        <div editable="rich">
-            <div class="btn-home">
-                <a class="btn btn-primary btn-sm px-4 gap-3" href="/dojos" role="button">Home</a>
             </div>
         </div>
     </div>

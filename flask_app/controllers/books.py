@@ -24,8 +24,6 @@ def add_author():
     book.Book.create_book(data)
     return redirect('/books')
 
-
-# TODO set routes to READ - SELECT from db in models
 @app.route('/books/<int:id')
 def show_books_fav_authors(id):
     """
@@ -39,6 +37,12 @@ def show_books_fav_authors(id):
     book = book.Book.get_book_and_author_fav(data)
     not_fav_author = author.Author.not_fav_author(data)
     return render_template('book_show.html', book=book, not_fav_author=not_fav_author)
+
+# TODO add to book author who is favorites it.
+@app.route('/books/favorite')
+def add_author_fav_to_book():
+    """Add author who favorites the book"""
+    pass
 
 # TODO set routes to UPDATE - UPDATE from db in models
 # TODO set routes to DELETE - DELETE from db in models

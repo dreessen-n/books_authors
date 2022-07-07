@@ -12,29 +12,31 @@
     <div class="container">
         <div class="row justify-content-evenly">
             <div class="col-4">
-                <h2>New Author</h2>
-                <form  action="/authors/create", method="POST">
-                    <label class="new_form" for="name">Name:</label>
-                    <input class="new_form" type="text" name="name" id="name">
+                <h2>New Book</h2>
+                <form  action="/books/create", method="POST">
+                    <label class="new_form" for="title">Title:</label>
+                    <input class="new_form" type="text" name="title" id="title">
+                    <label class="new_form" for="num_of_pages">Number of Pages:</label>
+                    <input class="new_form" type="text" name="num_of_pages" id="num_of_pages">
                     <div class="btn-add">
-                        <button class="new_form btn btn-primary btn-sm px-4 gap-3" type="submit">Add a Author</button>
+                        <button class="new_form btn btn-primary btn-sm px-4 gap-3" type="submit">Add a Book</button>
                     </div>
                 </form>
             </div>
             <div class="col-4">
-                <h2>All Authors</h2>
+                <h2>All Books</h2>
                 <table class="table table-striped">
                     <tbody>
-                        {% for author in all_authors %}
+                        {% for book in all_books %}
                         <tr>
-                            <td><a href="/authors/{{author.id}}">{{author.name}}</a></td>
+                            <td><a href="/books/{{book.id}}">{{book.title}}</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
                 <div editable="rich">
-                    <div class="btn-add">
-                        <a class="btn btn-primary btn-sm px-4 gap-3" href="/author_show" role="button">Add a Book</a>
+                    <div class="btn-home">
+                        <a class="btn btn-primary btn-sm px-4 gap-3" href="/authors" role="button">Home</a>
                     </div>
                 </div>
             </div>

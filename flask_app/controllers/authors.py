@@ -46,5 +46,12 @@ def show_author_fav(id):
     not_fav_books = book.Book.not_fav_books(data)
     return render_template('author_show.html', author= author, not_fav_books=not_fav_books)
 
+# TODO add to book to the author's fav list.
+@app.route('/author/favorite')
+def add_book_to_author_fav():
+    """Add book to the author's fav list"""
+    pass
+
+
 # TODO set routes to UPDATE - UPDATE from db in models
 # TODO set routes to DELETE - DELETE from db in models
