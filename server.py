@@ -1,7 +1,7 @@
 # server.py file
 
 # Import all the controllers
-from flask_app.controllers import authors
+from flask_app.controllers import authors, books
 # Import the app
 from flask_app import app
 

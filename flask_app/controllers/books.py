@@ -24,7 +24,7 @@ def add_author():
     book.Book.create_book(data)
     return redirect('/books')
 
-@app.route('/books/<int:id')
+@app.route('/books/<int:id>')
 def show_books_fav_authors(id):
     """
     Pass in book id

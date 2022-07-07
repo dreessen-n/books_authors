@@ -32,7 +32,7 @@ def add_author():
 
 
 # TODO set routes to READ - SELECT from db in models
-@app.route('/authors/<int:id')
+@app.route('/authors/<int:id>')
 def show_author_fav(id):
     """
     Pass in author id
