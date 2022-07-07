@@ -1,6 +1,6 @@
 # models.book
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask_app.models import author
+from flask_app.models import author, book
 
 class Book:
     def __init__(self, data):
@@ -46,7 +46,7 @@ class Book:
                 break
             # Create instance of author to add to list
             author_fav_data = {
-                'id': row_in_db['author.id'],
+                'id': row_in_db['author_id'],
                 'name': row_in_db['name'],
                 'created_at': row_in_db['created_at'],
                 'updated_at': row_in_db['updated_at']
@@ -58,7 +58,7 @@ class Book:
     @classmethod
     def not_fav_books(cls,data):
         """Get the list of books not favorited by author"""
-        query = "SELECT * FROM books WHERE books.id NOT IN (SELECT book_id FROM favorites WHERE author_id=%(id)s;"
+        query = "SELECT * FROM books WHERE books.id NOT IN (SELECT book_id FROM favorites WHERE author_id=%(id)s);"
         # Save results of the query
         results = connectToMySQL('books_authors_schema').query_db(query,data)
         # Create list for not_fav_books
@@ -66,7 +66,6 @@ class Book:
         # Iterate thru the results to add each not fav book instance to the list
         for row_in_db in results:
             not_fav_books.append(cls(row_in_db))
-        print(not_fav_books)
         return not_fav_books
 
 

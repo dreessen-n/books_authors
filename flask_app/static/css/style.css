@@ -18,6 +18,10 @@ body {
     border-radius: 15px;
 }
 
+.container_show {
+    width: 1000px; 
+}
+
 .input-group {
     margin-bottom: 10px;
 }

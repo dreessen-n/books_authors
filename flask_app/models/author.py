@@ -1,6 +1,6 @@
 # models.author
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask_app.models import book
+from flask_app.models import book, author
 
 class Author:
     def __init__(self,data):
@@ -33,7 +33,7 @@ class Author:
     def get_author_and_fav_books(cls,data):
         """Use LEFT JOINs to get author and all the books favorited by the author"""
         # get all from authors becuase need all values to manke an instance 
-        query = "SELECT * FROM authors LEFT JOIN favorites ON authors.id = favorites.author_id LEFT JOIN books ON favorites.book_id = book.id WHERE authors.id = %(id)s;"
+        query = "SELECT * FROM authors LEFT JOIN favorites ON authors.id = favorites.author_id LEFT JOIN books ON favorites.book_id = books.id WHERE authors.id = %(id)s;"
         results = connectToMySQL('books_authors_schema').query_db(query,data)
         # Result will be an author with associated favorite books
         # Create object instance of the author based on the first row returned
@@ -41,7 +41,7 @@ class Author:
         # Add all the favorite books to the instances fav_book list
         for row_in_db in results:
             # Add check for no favorites yet selected
-            if row_in_db['books_id'] == None:
+            if row_in_db['books.id'] == None:
                 # Possible add an alert to tell user no fav and redirect to authors page
                 break
             # Create instance of book to add to list
@@ -56,11 +56,10 @@ class Author:
         print(author)
         return author
 
-
     @classmethod
     def not_fav_author(cls,data):
         """Get the list of authors who have not favorited the book"""
-        query = "SELECT * FROM authors WHERE authors.id NOT IN (SELECT authors_id FROM favorites WHERE book_id=%(id)s;"
+        query = "SELECT * FROM authors WHERE authors.id NOT IN (SELECT author_id FROM favorites WHERE book_id=%(id)s);"
         # Save results of the query
         results = connectToMySQL('books_authors_schema').query_db(query,data)
         # Create list for authors who have not favorited the book 
@@ -68,5 +67,11 @@ class Author:
         # Iterate thru the results to add each author who still have to favorite the book and add to the list
         for row_in_db in results:
             not_fav_author.append(cls(row_in_db))
-        print(not_fav_author)
         return not_fav_author
+
+    @classmethod
+    def add_fav_book(cls,data):
+        """Add book to authors favorites"""
+        query = "INSERT INTO favorites (author_id, book_id) VALUES (%(author_id)s, %(book_id)s);"
+        return connectToMySQL('books_authors_schema').query_db(query,data)
+

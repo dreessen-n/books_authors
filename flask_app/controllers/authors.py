@@ -30,8 +30,6 @@ def add_author():
     author.Author.create_author(data)
     return redirect('/authors')
 
-
-# TODO set routes to READ - SELECT from db in models
 @app.route('/authors/<int:id>')
 def show_author_fav(id):
     """
@@ -42,15 +40,21 @@ def show_author_fav(id):
     data = {
         'id': id
     }
-    author = author.Author.get_author_and_fav_books(data)
+    author_ = author.Author.get_author_and_fav_books(data)
     not_fav_books = book.Book.not_fav_books(data)
-    return render_template('author_show.html', author= author, not_fav_books=not_fav_books)
+    return render_template('author_show.html', author=author_, not_fav_books=not_fav_books)
 
-# TODO add to book to the author's fav list.
-@app.route('/author/favorite')
+# TODO add book to author fav
+@app.route('/authors/favorite', methods=['POST'])
 def add_book_to_author_fav():
     """Add book to the author's fav list"""
-    pass
+    data = {
+        'author_id': request.form['author_id'],
+        'book_id': request.form['book_id']
+    }
+    author.Author.add_fav_book(data)
+    url = f"/authors/{request.form['author_id']}"
+    return redirect('url')
 
 
 # TODO set routes to UPDATE - UPDATE from db in models
