@@ -11,3 +11,34 @@ def display_books():
     books = book.Book.display_all_books()
     print(books)
     return render_template('books.html', all_books=books)
+
+@app.route('/books/create', methods=['POST'])
+def add_author():
+    """Add an book to the all_books"""
+    if request.form['title'] == '' or request.form['num_of_pages'] == '':
+        return redirect('/authors')
+    data = {
+        'title': request.form['title'],
+        'num_of_pages': request.form['num_of_pages']
+    }
+    book.Book.create_book(data)
+    return redirect('/books')
+
+
+# TODO set routes to READ - SELECT from db in models
+@app.route('/books/<int:id')
+def show_books_fav_authors(id):
+    """
+    Pass in book id
+    Display the books with favorites authors and add to books's favorites 
+    show authors who have not yet favorited the book
+    """
+    data = {
+        'id': id
+    }
+    book = book.Book.get_book_and_author_fav(data)
+    not_fav_author = author.Author.not_fav_author(data)
+    return render_template('book_show.html', book=book, not_fav_author=not_fav_author)
+
+# TODO set routes to UPDATE - UPDATE from db in models
+# TODO set routes to DELETE - DELETE from db in models

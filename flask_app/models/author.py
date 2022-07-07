@@ -56,3 +56,17 @@ class Author:
         print(author)
         return author
 
+
+    @classmethod
+    def not_fav_author(cls,data):
+        """Get the list of authors who have not favorited the book"""
+        query = "SELECT * FROM authors WHERE authors.id NOT IN (SELECT authors_id FROM favorites WHERE book_id=%(id)s;"
+        # Save results of the query
+        results = connectToMySQL('books_authors_schema').query_db(query,data)
+        # Create list for authors who have not favorited the book 
+        not_fav_author= []
+        # Iterate thru the results to add each author who still have to favorite the book and add to the list
+        for row_in_db in results:
+            not_fav_author.append(cls(row_in_db))
+        print(not_fav_author)
+        return not_fav_author
