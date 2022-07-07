@@ -41,9 +41,9 @@ class Book:
         # Add all the authors who favorited the book to the authors_fav list
         for row_in_db in results:
             # Add check for no favorite from authors
-            if row_in_db['author_id'] == None:
+            # if row_in_db['author_id'] == None:
                 # Possible to add alert to tell user no fav and to redirect back to book page
-                break
+                # break
             # Create instance of author to add to list
             author_fav_data = {
                 'id': row_in_db['author_id'],
