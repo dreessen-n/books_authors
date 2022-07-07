@@ -32,9 +32,9 @@
             <div class="col-4">
                 <h2>Add Author's Favorite</h2>
                 <form  action="/authors/favorite", method="POST">
-                    <input type='hidden' name='author_id' value='{{author_id}}'>
+                    <input type='hidden' name='author_id' value='{{author.id}}'>
                     <label class="new_form" for="name">Book:</label>
-                    <select name="'book_id" class="form-select" aria-label="Default select example">
+                    <select name="book_id" class="form-select" aria-label="Default select example">
                         <option selected>Select a Book</option>
                         {% for book in not_fav_books %}
                         <option value="{{book.id}}">{{book.title}}</option>
