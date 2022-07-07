@@ -57,6 +57,5 @@ def add_book_to_author_fav():
     url = f"/authors/{request.form['author_id']}"
     return redirect('url')
 
-
 # TODO set routes to UPDATE - UPDATE from db in models
 # TODO set routes to DELETE - DELETE from db in models
