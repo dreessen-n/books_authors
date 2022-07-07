@@ -48,6 +48,7 @@ def show_author_fav(id):
 @app.route('/authors/favorite', methods=['POST'])
 def add_book_to_author_fav():
     """Add book to the author's fav list"""
+    print(request.form)
     data = {
         'author_id': request.form['author_id'],
         'book_id': request.form['book_id']
